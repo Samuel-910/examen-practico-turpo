@@ -38,13 +38,10 @@ jupyterlab
 nbformat
 ```
 
-### 1.2 (Opcional) Modalidad AWS Education
+### 1.2 Entorno de despliegue
 
-Si tu equipo no cumple el mínimo recomendado (8 GB RAM, 4 vCPU, 50 GB),
-documenta aquí: especificaciones de tu equipo personal, ID de instancia(s) EC2,
-región (`us-east-1`), AMI usada y los comandos de instalación. Los screenshots
-deben mostrar el prompt con el hostname EC2 (ej. `ubuntu@ip-10-0-1-5`) o la URL
-del servicio AWS.
+Los laboratorios se desplegaron y ejecutaron en una máquina virtual local (Ubuntu 22.04 LTS) con dirección IP `192.168.100.100`. 
+El servicio SIEM utilizado fue Wazuh Indexer (OpenSearch / Elasticsearch), y la visualización de los datos se realizó mediante Grafana 10.4.1.
 
 ---
 
@@ -93,7 +90,7 @@ chmod +x lab2/simular_bruteforce.sh
 sudo tail -n 50 /var/ossec/logs/alerts/alerts.log | grep -A6 100001
 ```
 
-- `local_rules_ssh.xml` (rule 100001): 10 fallos SSH en 60 s desde la misma IP,
+- `local_rules_ssh.xml` (rule 100001): 5 fallos SSH en 120 s desde la misma IP,
   nivel 10, grupos `authentication_failures,brute_force`.
 - `local_rules_exfil.xml` (rules 100010-100012): correlación de transferencia
   saliente >500 MB tras un login fuera de horario (22:00–06:00), nivel 14.
@@ -128,7 +125,7 @@ python lab3/predecir.py lab3/nuevo_trafico.csv
   V1 barras por `rule.level`, V2 tabla Top 10 `data.srcip`, V3 línea de alertas
   por hora, V4 pie por `rule.groups`, más panel de texto del autor.
 - Rango de tiempo global: últimas 24 h. Alerta de umbral en V3: >5 eventos
-  nivel ≥10 en 5 min (configúrala y captura `SCR-4.4`).
+  nivel ≥10 en 5 min (configurada exitosamente con evaluación cada 1m).
 
 ---
 
@@ -141,7 +138,7 @@ examen-practico-<apellido>/
 ├── lab1/  (analizar_ssh.py, analizar_web.py, visualizar.py, reportes, graficas/, evidencias/)
 ├── lab2/  (local_rules_ssh.xml, local_rules_exfil.xml, simular_bruteforce.sh, evidencias/)
 ├── lab3/  (deteccion_anomalias.ipynb, predecir.py, modelo_anomalias.pkl, network_traffic.csv, evidencias/)
-├── lab4/  (dashboard_soc.json, datasource_config.json, evidencias/)
+├── lab4/  (dashboard_soc.json, datasource_config.json, herramienta_usada.txt, evidencias/)
 └── utilidades/  (scripts que GENERARON los datos de prueba sintéticos; opcional)
 ```
 
