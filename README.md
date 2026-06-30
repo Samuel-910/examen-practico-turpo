@@ -4,15 +4,6 @@
 **Escuela:** Ingeniería de Sistemas — Ciclo IX
 **Autor:** _Jose Turpo_
 **Repositorio:** `examen-practico-turpo`
-
-> **IMPORTANTE — antes de entregar:**
-> 1. Renombra la carpeta del repo a `examen-practico-<tuapellido>` (minúsculas).
-> 2. Reemplaza `<Tu Nombre y Apellido>` en este README, en el notebook y en el panel de Grafana.
-> 3. Sustituye los datos de prueba sintéticos por los archivos oficiales del curso
->    (`examenfinal/lab1/auth.log`, `access.log`, `examenfinal/lab3/network_traffic.csv`).
-> 4. Ejecuta cada laboratorio **en tu entorno** y toma los screenshots requeridos
->    (con tu nombre y fecha/hora visibles). Esos screenshots son responsabilidad tuya.
-
 ---
 
 ## 1. Entorno de trabajo
