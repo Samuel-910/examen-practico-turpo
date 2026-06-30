@@ -17,9 +17,6 @@
 | Grafana | 10.x | `grafana-server -v` |
 | Jupyter | Notebook/Lab | `jupyter --version` |
 
-> Rellena la columna "Versión usada" con las versiones reales de tu máquina y
-> añade capturas de los servicios activos.
-
 ### 1.1 Instalación de dependencias Python
 
 ```bash
