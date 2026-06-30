@@ -84,13 +84,13 @@ xmllint --noout lab2/local_rules_exfil.xml && echo OK
 # Reiniciar el manager y simular el ataque
 sudo systemctl restart wazuh-manager
 chmod +x lab2/simular_bruteforce.sh
-./lab2/simular_bruteforce.sh 127.0.0.1 usuario_inexistente
+./lab2/simular_bruteforce.sh 127.0.0.1 20
 
 # Revisar la alerta disparada
-sudo tail -n 50 /var/ossec/logs/alerts/alerts.log | grep -A6 100001
+sudo grep -A 10 "100001" /var/ossec/logs/alerts/alerts.log
 ```
 
-- `local_rules_ssh.xml` (rule 100001): 5 fallos SSH en 120 s desde la misma IP,
+- `local_rules_ssh.xml` (rule 100001): 10 fallos SSH en 120 s desde la misma IP,
   nivel 10, grupos `authentication_failures,brute_force`.
 - `local_rules_exfil.xml` (rules 100010-100012): correlación de transferencia
   saliente >500 MB tras un login fuera de horario (22:00–06:00), nivel 14.
@@ -139,24 +139,4 @@ examen-practico-<apellido>/
 ├── lab2/  (local_rules_ssh.xml, local_rules_exfil.xml, simular_bruteforce.sh, evidencias/)
 ├── lab3/  (deteccion_anomalias.ipynb, predecir.py, modelo_anomalias.pkl, network_traffic.csv, evidencias/)
 ├── lab4/  (dashboard_soc.json, datasource_config.json, herramienta_usada.txt, evidencias/)
-└── utilidades/  (scripts que GENERARON los datos de prueba sintéticos; opcional)
-```
-
-> La carpeta `utilidades/` contiene los generadores de los datos de prueba
-> (`_generar_datos_logs.py`, `_generar_dataset.py`, `_construir_notebook.py`).
-> No son parte de los entregables exigidos; sirven para regenerar datos de
-> desarrollo. Elimínala si quieres entregar solo lo pedido.
-
----
-
-## 4. Flujo Git inicial
-
-```bash
-git init
-git add .
-git commit -m "Estructura inicial del examen práctico"
-git remote add origin <URL_de_tu_repo>
-git branch -M main
-git push -u origin main
-# ... commits frecuentes por cada laboratorio terminado ...
 ```
