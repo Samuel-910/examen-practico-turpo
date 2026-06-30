@@ -1,0 +1,9 @@
+Herramienta de Visualización (Dashboard): Grafana
+Versión instalada: 10.4.1 (OSS)
+URL del servicio: http://192.168.100.100:3000
+
+Origen de Datos (Data Source) conectado:
+Herramienta SIEM: Wazuh Indexer (Elasticsearch / OpenSearch)
+Versión de compatibilidad: 7.10+
+URL del origen de datos: https://localhost:9200
+IP del Servidor Principal: 192.168.100.100

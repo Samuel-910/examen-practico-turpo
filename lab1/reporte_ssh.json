@@ -1,0 +1,21 @@
+{
+  "fecha_analisis": "2026-06-30 19:56:33",
+  "total_intentos_fallidos": 253,
+  "ips_sospechosas": [
+    {
+      "ip": "45.33.32.156",
+      "intentos": 120,
+      "alerta": true
+    },
+    {
+      "ip": "193.32.162.55",
+      "intentos": 58,
+      "alerta": true
+    },
+    {
+      "ip": "91.240.118.172",
+      "intentos": 30,
+      "alerta": false
+    }
+  ]
+}

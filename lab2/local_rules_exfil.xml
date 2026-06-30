@@ -1,0 +1,40 @@
+<group name="local,exfiltration,">
+
+  <!--   Etapa A (rule 100010): detecta un LOGIN EXITOSO fuera del horario
+          laboral (22:00 - 06:00). Usa el campo <time> que evalua la
+          hora del evento. Se apoya en la regla base 5715 (sshd:
+          authentication success).
+  -->
+  <rule id="100010" level="8">
+    <if_sid>5715</if_sid>
+    <time>10:00 pm - 6:00 am</time>
+    <description>Login SSH exitoso fuera del horario laboral desde $(srcip)</description>
+    <group>authentication_success,off_hours,</group>
+  </rule>
+
+  <!--   Etapa B (rule 100011): detecta una TRANSFERENCIA SALIENTE grande
+          (> 500 MB en una sola conexion) desde un host interno.
+          Se asume que el firewall/IDS reporta los bytes en el campo
+          data.bytes (decoder previo). El match numerico > 500000000
+          bytes (~500 MB) se hace con pcre2 sobre un valor de 9+ digitos.
+  -->
+  <rule id="100011" level="9">
+    <field name="data.direction">outbound</field>
+    <field name="data.bytes">^[5-9]\d{8}$|^\d{10,}$</field>
+    <description>Transferencia saliente masiva (>500 MB) desde host interno $(srcip)</description>
+    <group>data_transfer,large_outbound,</group>
+  </rule>
+
+  <!--   Regla final (100012): se dispara SOLO si la transferencia grande
+          (100011) ocurre DESPUES de un login fuera de horario (100010)
+          desde el mismo origen -> patron de exfiltracion. Nivel 14.
+  -->
+  <rule id="100012" level="14" timeframe="3600">
+    <if_matched_sid>100011</if_matched_sid>
+    <if_matched_sid>100010</if_matched_sid>
+    <same_source_ip />
+    <description>CRITICO: Posible exfiltracion de datos - transferencia masiva tras login fuera de horario desde $(srcip)</description>
+    <group>exfiltration,data_breach,attack,</group>
+  </rule>
+
+</group>
